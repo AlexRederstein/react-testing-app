@@ -1,0 +1,40 @@
+div.productCard {
+  border: 1px solid grey;
+  margin: 15px 0;
+  border-radius: 5px;
+  padding: 10px 50px;
+  box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+}
+
+div.productCard:hover {
+  outline: 2px solid blue;
+  /* border-width: 2px;
+  border-color: blue; */
+}
+
+div.ProductFooter {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+div.ProductBody {
+  margin: 15px 0;
+}
+
+div.ProductRaiting {
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 15px;
+}
+
+div.ProductPrise {
+  background-color: blue;
+  border-radius: 5px;
+  color: white;
+  padding: 15px;
+}
+img.ArticleTabImage {
+  margin: 15px 0;
+  max-height: 300px;
+}
