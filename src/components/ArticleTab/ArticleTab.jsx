@@ -1,6 +1,6 @@
 import "./ArticleTab.css";
 import defaultImage from "../../defaultImage.png";
-import Button from "../Button/Button";
+import Button from "../UI/Button/Button";
 
 export default function ArticleTab(props) {
   return (

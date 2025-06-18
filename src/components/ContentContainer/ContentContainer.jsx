@@ -1,20 +1,31 @@
 import "./ContentContainer.css";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { articles } from "../../Articles.js";
 import ArticleBoard from "../ArticlesBoard/ArticleBoard.jsx";
-import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
+import PostFilter from "../PostFilter/PostFilter.jsx";
 import PostForm from "../Postform/PostForm.jsx";
-import Select from "../Select/Select.jsx";
+import Modal from "../UI/Modal/Modal.jsx";
+import Button from "../UI/Button/Button.jsx";
 
 export default function ContentContainer() {
   const [articlesArray, setArticles] = useState(articles);
-  const [selectedSort, setSort] = useState("");
+  const [filter, setFilter] = useState({ sort: "", query: "" });
+  const [visible, setVisible] = useState(false);
 
-  function setselectedSort(sort) {
-    // setSort(selectedSort);
-    console.log(sort);
-    setSort([...articlesArray].sort((a, b) => a[sort].localeCompare(b[sort])));
-  }
+  const sortedPost = useMemo(() => {
+    if (filter.sort) {
+      return [...articlesArray].sort((a, b) =>
+        a[filter.sort].localeCompare(b[filter.sort])
+      );
+    }
+    return articlesArray;
+  }, [filter.sort, articlesArray]);
+
+  const sortedAndSearchedPosts = useMemo(() => {
+    return sortedPost.filter((post) =>
+      post.title.toLowerCase().includes(filter.query.toLowerCase())
+    );
+  }, [filter.query, sortedPost]);
 
   function createPost(newPost) {
     setArticles([...articlesArray, newPost]);
@@ -26,28 +37,18 @@ export default function ContentContainer() {
 
   return (
     <main>
-      <div>
-        <Select
-          value={selectedSort}
-          onChange={(sort) => setselectedSort(sort)}
-          defaultValue="Сортировка по"
-          options={[
-            { value: "title", name: "По названию" },
-            { value: "text", name: "По тексту" },
-          ]}
-        ></Select>
-      </div>
+      <Button onClick={() => setVisible(!visible)}>Добавить новый пост</Button>
+      <PostFilter filter={filter} setFilter={setFilter} />
       <hr style={{ margin: "15px 0" }} />
-      <PostForm create={createPost} />
-      {articlesArray.length !== 0 ? (
-        <ArticleBoard
-          remove={removePost}
-          articles={articlesArray}
-          title="Список 1"
-        />
-      ) : (
-        <div style={{ textAlign: "center" }}>Файлы не найдены</div>
-      )}
+      <Modal visible={visible} setVisible={setVisible}>
+        <PostForm create={createPost} />
+      </Modal>
+
+      <ArticleBoard
+        remove={removePost}
+        articles={sortedAndSearchedPosts}
+        title="Список 1"
+      />
     </main>
   );
 }
