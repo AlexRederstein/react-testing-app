@@ -1,3 +1,5 @@
+import "./Select.css";
+
 export default function Select({ options, defaultValue, value, onChange }) {
   return (
     <select value={value} onChange={(e) => onChange(e.target.value)}>

@@ -9,7 +9,9 @@ export default function Modal({ children, visible, setVisible }) {
 
   return (
     <div className={rootClasses.join(" ")} onClick={() => setVisible(false)}>
-      <div className={classes.content}>{children}</div>
+      <div className={classes.content} onClick={(e) => e.stopPropagation()}>
+        {children}
+      </div>
     </div>
   );
 }

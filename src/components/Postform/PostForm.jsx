@@ -12,15 +12,9 @@ export default function PostForm({ create }) {
     e.preventDefault();
     const newPost = {
       ...post,
-      id: Date.now(),
-      datePublished: Date.now(),
     };
     create(newPost);
-    // setArticles([
-    //   ...articlesArray,
-    //   { ...post, id: Date.now(), datePublished: Date.now() },
-    // ]);
-    setPost({ title: "", text: "" });
+    setPost({ title: "", body: "" });
   }
 
   return (
@@ -32,8 +26,8 @@ export default function PostForm({ create }) {
         placeholder="Заголовок"
       />
       <Input
-        value={post.text}
-        onChange={(e) => setPost({ ...post, text: e.target.value })}
+        value={post.body}
+        onChange={(e) => setPost({ ...post, body: e.target.value })}
         placeholder="Текст"
         type="text"
       />

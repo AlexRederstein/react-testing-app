@@ -15,9 +15,9 @@ export default function ArticleTab(props) {
         <h3>{props.title}</h3>
         <Button onClick={(e) => props.remove(props)}>Удалить</Button>
       </div>
-      <div>{new Date(props.datePublished).toLocaleString()}</div>
-      <img className="ArticleTabImage" src={defaultImage} alt="" />
-      <div>{props.text}</div>
+      {/* <div>{new Date(props.datePublished).toLocaleString()}</div> */}
+      {/* <img className="ArticleTabImage" src={defaultImage} alt="" /> */}
+      <div>{props.body}</div>
     </div>
   );
 }

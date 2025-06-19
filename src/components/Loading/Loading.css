@@ -1,0 +1,19 @@
+div.loading {
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  border: 5px solid blue;
+  border-bottom-color: transparent;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotare 1s linear infinite;
+}
+
+@keyframes rotare {
+  0% {
+    transform: rotare(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
